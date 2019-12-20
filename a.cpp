@@ -40,16 +40,18 @@ void SplitTest(void)
     IupSetAttribute(row_bottom,"NMARGIN","0x4");
     IupSetCallback(close,"ACTION",(Icallback)Close_dlg);
     Ihandle *menu,*chat,*announce,*album,*file,*settings,*settings0,*settings1,*settings2;
-    chat=IupSubmenu("聊天",IupMenu(NULL));
-    announce=IupSubmenu("公告",IupMenu(NULL));
-    album=IupSubmenu("相册",IupMenu(NULL));
-    file=IupSubmenu("文件",IupMenu(NULL));
-    settings0=IupItem("查看群资料",NULL);
-    settings1=IupItem("更新群信息",NULL);
-    settings2=IupItem("退出该群",NULL);
-    settings=IupSubmenu("设置",IupMenu(settings0,settings1,settings2,IupSeparator(),NULL));
-    // menu=IupMenu(chat,announce,file,NULL);
-    menu=IupMenu(chat,announce,album,file,settings,NULL);
+    menu=IupMenu(
+        chat=IupSubmenu("聊天",IupMenu(NULL)),
+        announce=IupSubmenu("公告",IupMenu(NULL)),
+        album=IupSubmenu("相册",IupMenu(NULL)),
+        file=IupSubmenu("文件",IupMenu(NULL)),
+        settings=IupSubmenu("设置",IupMenu(
+            settings0=IupItem("查看群资料",NULL),
+            settings1=IupItem("更新群信息",NULL),
+            IupSeparator(),
+            settings2=IupItem("退出该群",NULL),
+            NULL)),
+        NULL);
     IupSetHandle("mymenu",menu);
     IupSetAttribute(dlg,"TITLE","QQ群");
     IupSetAttribute(dlg,"MENU","mymenu");
