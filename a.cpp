@@ -18,12 +18,12 @@ void SplitTest(void)
                 *message,
                 *row_bottom,
                     *fill=IupFill(),
-                    *send=IupButton("发送",NULL),
-                    *close=IupButton("关闭",NULL);
+                    *send=IupButton("发送(&S)",NULL),
+                    *close=IupButton("关闭(&C)",NULL);
     record=IupMultiLine(NULL);
     row_insert=IupHbox(insert_emoji,insert_image,NULL);
     message=IupText(NULL);
-    row_bottom=IupHbox(fill,send,close,NULL);
+    row_bottom=IupHbox(fill,close,send,NULL);
     split_bottom=IupVbox(row_insert,message,row_bottom,NULL);
     split=IupSplit(record,split_bottom);
     ui=IupHbox(split,NULL);
