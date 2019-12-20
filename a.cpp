@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "iup.h"
 
+int Close_dlg(){
+    return IUP_CLOSE;
+}
+
 void SplitTest(void)
 {
     Ihandle *dlg,
@@ -29,16 +33,23 @@ void SplitTest(void)
     IupSetAttribute(record,"EXPAND","YES");
     IupSetAttribute(split_bottom,"EXPAND","YES");
     IupSetAttribute(message,"EXPAND","YES");
-    IupSetAttribute(row_bottom,"ALIGNMENT","RIGHT");
+    IupSetAttribute(dlg,"SIZE","240x160");
+    IupSetAttribute(dlg,"SHRINK","YES");
     IupSetAttribute(ui,"MARGIN","4x4");
-    IupSetAttribute(split,"SIZE","320x120");
-    IupSetAttribute(record,"SIZE","0x40");
+    IupSetAttribute(record,"SIZE","40x20");
     IupSetAttribute(row_insert,"MARGIN","0x4");
     IupSetAttribute(split_bottom,"MARGIN","0x0");
     IupSetAttribute(row_bottom,"MARGIN","0x4");
-    IupSetAttribute(dlg,"TITLE","测试");
-    Ihandle *chat,*announce,*file;
-    //IupSubmenu();
+    IupSetCallback(close,"ACTION",(Icallback)Close_dlg);
+    Ihandle *menu,*chat,*announce,*file;
+    chat=IupSubmenu("聊天",IupMenu(NULL));
+    announce=IupSubmenu("公告",IupMenu(NULL));
+    file=IupSubmenu("文件",IupMenu(NULL));
+    // menu=IupMenu(chat,announce,file,NULL);
+    menu=IupMenu(chat,announce,file,NULL);
+    IupSetHandle("mymenu",menu);
+    IupSetAttribute(dlg,"TITLE","QQ群");
+    IupSetAttribute(dlg,"MENU","mymenu");
     IupShow(dlg);
 }
 
