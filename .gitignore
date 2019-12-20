@@ -1,4 +1,2 @@
-*.dll
 *.exe
 *.o
-include
